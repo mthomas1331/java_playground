@@ -2,7 +2,7 @@ package challenges.week_2.array_merge;
 
 public class ArrayMerge {
 
-    private final int[] intArr1, intArr2, finalArray, ascSortedArray;// descSortedArray;
+    private final int[] intArr1, intArr2, finalArray, ascSortedArray, descSortedArray;
 
     public ArrayMerge(int[] intArr1, int[] intArr2) {
         this.intArr1 = intArr1;
@@ -10,6 +10,7 @@ public class ArrayMerge {
         //merge two arrays method call
         finalArray = mergedArray();
         ascSortedArray = sortArrayAsc(finalArray.clone());
+        descSortedArray = sortArrayDesc(finalArray.clone());
     }
 
     //merge 2 arrays method
@@ -31,25 +32,33 @@ public class ArrayMerge {
     }
 
     //sort the array in ascending order method
-    private int[] sortArrayAsc(int[] unsortedArray){
+    private int[] sortArrayAsc(int[] ascArray){
         int temp;
-        for (int i = 0; i < unsortedArray.length; i++) {
-            for (int j = 0; j < unsortedArray.length; j++) {
-                if (unsortedArray[i] < unsortedArray[j]) {
-                    temp = unsortedArray[j];
-                    unsortedArray[j] = unsortedArray[i];
-                    unsortedArray[i] = temp;
+        for (int i = 0; i < ascArray.length; i++) {
+            for (int j = 0; j < ascArray.length; j++) {
+                if (ascArray[i] < ascArray[j]) {
+                    temp = ascArray[j];
+                    ascArray[j] = ascArray[i];
+                    ascArray[i] = temp;
                 }
             }
         }
-        return unsortedArray;
+        return ascArray;
     }
 
-    /*private int[] sortArrayDesc(){
-
-        return descSortedArray;
-
-    }*/
+    private int[] sortArrayDesc(int[] descArray){
+        int temp;
+        for (int i = 0; i < descArray.length; i++) {
+            for (int j = 0; j < descArray.length; j++) {
+                if (descArray[i] > descArray[j]) {
+                    temp = descArray[j];
+                    descArray[j] = descArray[i];
+                    descArray[i] = temp;
+                }
+            }
+        }
+        return descArray;
+    }
 
 
     //getter for testing purpose
@@ -61,7 +70,7 @@ public class ArrayMerge {
         return ascSortedArray;
     }
 
-    /*public int[] getDescSortedArray() {
+    public int[] getDescSortedArray() {
         return descSortedArray;
-    }*/
+    }
 }

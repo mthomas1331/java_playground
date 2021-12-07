@@ -1,9 +1,9 @@
 package challenges.week_2.array_merge;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -27,6 +27,16 @@ public class ArrayMergeTests {
         }
     }
 
+    public int[] reverseArray(int[] sortedArray) {
+        int temp;
+        for (int i = 0; i < sortedArray.length / 2; i++) {
+            temp = sortedArray[i];
+            sortedArray[i] = sortedArray[sortedArray.length - (i + 1)];
+            sortedArray[sortedArray.length - (i + 1)] = temp;
+        }
+        return sortedArray;
+    }
+
     @Test
     public void mergeArrayTest(){
         initialiseParameters();
@@ -39,6 +49,10 @@ public class ArrayMergeTests {
         //Ascending sorted array test
         Arrays.sort(mergeArray);
         assertArrayEquals(mergeArray, arrayMerge.getAscSortedArray());
+
+        //Reverse array function
+        int[] reverseArraySetUp = reverseArray(mergeArray.clone());
         //Descending sorted array test
+        assertArrayEquals(reverseArraySetUp, arrayMerge.getDescSortedArray());
     }
 }
