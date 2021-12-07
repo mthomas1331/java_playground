@@ -1,16 +1,22 @@
 package challenges.week_2.array_merge;
 
+import java.util.*;
+
 public class ArrayMerge {
 
     private final int[] intArr1, intArr2, finalArray, ascSortedArray, descSortedArray;
-
+    private final Set<Integer> removeDuplicateSet;
     public ArrayMerge(int[] intArr1, int[] intArr2) {
         this.intArr1 = intArr1;
         this.intArr2 = intArr2;
         //merge two arrays method call
         finalArray = mergedArray();
+        //ascending sort method call
         ascSortedArray = sortArrayAsc(finalArray.clone());
+        //descending sort method call
         descSortedArray = sortArrayDesc(finalArray.clone());
+        //remove duplicate sort method call
+        removeDuplicateSet = removeDuplicateFromArray(finalArray.clone());
     }
 
     //merge 2 arrays method
@@ -20,14 +26,9 @@ public class ArrayMerge {
         //create the merge array
         int[] mergeArray = new int[sizeOfMergeArray];
 
-        //for loops to populate the merged array
-        for (int i = 0; i < intArr1.length; i++) {
-            mergeArray[i] = intArr1[i];
-        }
-
-        for (int j = 0; j < intArr2.length; j++) {
-            mergeArray[(intArr1.length + j)] = intArr2[j];
-        }
+        //System method for copy arrays into one
+        System.arraycopy(intArr1, 0, mergeArray, 0, intArr1.length);
+        System.arraycopy(intArr2, 0, mergeArray, intArr1.length, intArr2.length);
         return mergeArray;
     }
 
@@ -46,6 +47,8 @@ public class ArrayMerge {
         return ascArray;
     }
 
+    //sort the array in descending order method - reverse the inequality sign from above
+    //Future improvement - make it DRY
     private int[] sortArrayDesc(int[] descArray){
         int temp;
         for (int i = 0; i < descArray.length; i++) {
@@ -60,6 +63,13 @@ public class ArrayMerge {
         return descArray;
     }
 
+    //removes duplicate from the array
+    private Set<Integer> removeDuplicateFromArray(int[] nonDuplicateArray){
+        //convert int into Integer wrapper class to make use of Collections - TreeSet
+        Integer[] notDuplicateIntArray = new Integer[nonDuplicateArray.length];
+        Arrays.setAll(notDuplicateIntArray, i -> nonDuplicateArray[i]);
+        return new TreeSet<>(List.of(notDuplicateIntArray));
+    }
 
     //getter for testing purpose
     public int[] getFinalArray() {
@@ -72,5 +82,9 @@ public class ArrayMerge {
 
     public int[] getDescSortedArray() {
         return descSortedArray;
+    }
+
+    public Set<Integer> getRemoveDuplicateSet() {
+        return removeDuplicateSet;
     }
 }
