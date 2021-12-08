@@ -43,7 +43,7 @@ public class ArrayMergeTests {
     public void reverseArray(int[] mergeArray) {
         descSortedArray = mergeArray.clone();
         int temp;
-        //swaps the position of elements in the array from the begining to the end
+        //swaps the position of elements in the array from the beginning to the end
         for (int i = 0; i < descSortedArray.length / 2; i++) {
             temp = descSortedArray[i];
             descSortedArray[i] = descSortedArray[descSortedArray.length - (i + 1)];
